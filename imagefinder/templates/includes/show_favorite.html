@@ -1,0 +1,23 @@
+{% load staticfiles %}
+
+
+<div class="col-md-4 col-sm-12">
+    <div class="portfolio-item" data-id={{ image.api_id }} data-referrer={{ image.referrer }}>
+        <div class="portfolio-hover" data-img-url={{ image.imageURL }} data-toggle="modal" data-target="#myImageModal">
+{#            <a href={{ image.pageURL }}>#}
+                <img src={{ image.imageURL }} class="img-responsive img-hover" alt="">
+{#            </a>#}
+        </div>
+        <div class="portfolio-caption">
+            <h4 class="col-md-10">By: {{ image.author }}</h4>
+            {% if current_path = "/featured/" %}
+                <span class="col-md-2 glyphicon glyphicon-heart-empty portfolio-icon text-right"></span>
+            {% else %}
+                <span class="col-md-2 glyphicon glyphicon-heart portfolio-icon text-right"></span>
+            {% endif %}
+{#            <p class="col-md-12 text-muted"><span class="glyphicon glyphicon-tag"></span>  {{ image.tags }}</p>#}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+

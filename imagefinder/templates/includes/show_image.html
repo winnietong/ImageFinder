@@ -1,0 +1,22 @@
+{% load staticfiles %}
+
+
+<div class="col-md-4 col-sm-12">
+    <div class="portfolio-item" data-id={{ api_id }} data-referrer={{ referrer }}>
+        <div class="portfolio-hover" data-img-url={{ imageURL }} data-toggle="modal" data-target="#myModal">
+            <a href={{ pageURL }}>
+                <img src="{{ thumbnailURL }}" class="img-responsive img-hover"/>
+            </a>
+        </div>
+        <div class="portfolio-caption">
+            <h4 class="col-md-10">By: {{ author }}</h4>
+            {% if favorited %}
+                <span class="col-md-2 glyphicon glyphicon-heart portfolio-icon text-right"></span>
+            {% else %}
+                <span class="col-md-2 glyphicon glyphicon-heart-empty portfolio-icon text-right"></span>
+            {% endif %}
+            <p class="col-md-12 text-muted"><span class="glyphicon glyphicon-tag"></span>  {{ tags }}</p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

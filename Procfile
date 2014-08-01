@@ -1,0 +1,1 @@
+web: gunicorn imagefinder.wsgi --log-file -

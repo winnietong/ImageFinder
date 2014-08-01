@@ -1,0 +1,37 @@
+{% extends 'base_template.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    Search Images
+{% endblock title %}
+
+
+
+{% block content %}
+
+    <div class="container" style="border-top: 1px solid #f3f7f9; padding-top: 40px;">
+
+        <div class="input-group col-md-6 col-sm-6">
+            <input id="search" type="Search" placeholder="Search..." class="form-control" />
+            <div class="input-group-btn">
+                <button class="btn btn-info" id="searchButton">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </div>
+        </div>
+
+{#        <p>This is the query for: {{ query }}</p>#}
+
+        <div class="works">
+			<div class="row" id="projects">
+
+            {#  This is where all the projects/images get shown  #}
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock content %}
+
+

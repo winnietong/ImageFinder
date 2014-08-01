@@ -1,0 +1,120 @@
+{% extends 'base_template.html' %}
+
+{% block title %}
+    Testing
+{% endblock title %}
+
+
+
+{% block content %}
+
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="intro-text">
+                <div class="intro-lead-in">The largest free image search engine on the internet.</div>
+{#                <div class="intro-heading">It's Nice To Meet You</div>#}
+                <input type="text" id="search" style="font-size: 20px; padding: 13px; width: 400px;" placeholder="Ex search: cats, shopping, business meeting">
+                <button class="btn btn-warning" id="searchButton">SEARCH</button>
+            </div>
+        </div>
+    </header>
+
+    <br>
+
+    <!-- Search Results -->
+    <div class="container" id="searchContainer">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading search-heading" style="display: none;">Search Results</h2>
+            </div>
+        </div>
+
+        <div class="content" id="projects">
+            <!-- Search Results DISPLAY -->
+        </div>
+    </div>
+
+    <div class="container text-center">
+        <button class="btn btn-lg btn-default" id="seeMoreButton" style="margin: auto; display: none;">See More</button>
+    </div>
+    <hr>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Open Imager</h2>
+                    <h3 class="section-subheading text-muted">Free, high quality images for all your projects.</h3>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fa fa-square fa-stack-2x text-primary"></i>
+                        <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">Beautiful, Free Photos</h4>
+                    <p class="text-muted">We figure out the licensing so you don't have to.</p>
+                </div>
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fa fa-square fa-stack-2x text-primary"></i>
+                        <i class="fa fa-heart-o fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">Save your favorite photos</h4>
+                    <p class="text-muted">Store and save your photos with us so you can use it any time in the future.</p>
+                </div>
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fa fa-square fa-stack-2x text-primary"></i>
+                        <i class="fa fa-cloud-download fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">Download Anywhere</h4>
+                    <p class="text-muted">Download your photos from anywhere.</p>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </section>
+
+     <!-- Trending Images -->
+    <section id="trending">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Trending Images</h2>
+                    <h3 class="section-subheading text-muted">Some of our user's favorite images.</h3>
+                </div>
+            </div>
+            <div class="row text-center">
+                {% for image in images %}
+                    {% include 'includes/show_favorite.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Your Image:</h4>
+      </div>
+      <div class="modal-body">
+        <img class="img-responsive" src="">
+      </div>
+      <div class="modal-footer">
+{#        <button type="button" class="btn btn-default" data-dismiss="modal">Add to Favorites</button>#}
+        <a href="" download="" type="button" class="btn btn-primary" id="downloadImage">Download Image</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+

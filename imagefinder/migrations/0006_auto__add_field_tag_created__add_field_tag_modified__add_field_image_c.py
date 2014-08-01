@@ -1,0 +1,110 @@
+# -*- coding: utf-8 -*-
+from south.utils import datetime_utils as datetime
+from south.db import db
+from south.v2 import SchemaMigration
+from django.db import models
+
+
+class Migration(SchemaMigration):
+
+    def forwards(self, orm):
+        # Adding field 'Tag.created'
+        db.add_column(u'imagefinder_tag', 'created',
+                      self.gf('django.db.models.fields.DateField')(auto_now_add=True, default=datetime.datetime(2014, 8, 1, 0, 0), blank=True),
+                      keep_default=False)
+
+        # Adding field 'Tag.modified'
+        db.add_column(u'imagefinder_tag', 'modified',
+                      self.gf('django.db.models.fields.DateField')(auto_now=True, default=datetime.datetime(2014, 8, 1, 0, 0), blank=True),
+                      keep_default=False)
+
+        # Adding field 'Image.created'
+        db.add_column(u'imagefinder_image', 'created',
+                      self.gf('django.db.models.fields.DateField')(auto_now_add=True, default=datetime.datetime(2014, 8, 1, 0, 0), blank=True),
+                      keep_default=False)
+
+        # Adding field 'Image.modified'
+        db.add_column(u'imagefinder_image', 'modified',
+                      self.gf('django.db.models.fields.DateField')(auto_now=True, default=datetime.datetime(2014, 8, 1, 0, 0), blank=True),
+                      keep_default=False)
+
+
+    def backwards(self, orm):
+        # Deleting field 'Tag.created'
+        db.delete_column(u'imagefinder_tag', 'created')
+
+        # Deleting field 'Tag.modified'
+        db.delete_column(u'imagefinder_tag', 'modified')
+
+        # Deleting field 'Image.created'
+        db.delete_column(u'imagefinder_image', 'created')
+
+        # Deleting field 'Image.modified'
+        db.delete_column(u'imagefinder_image', 'modified')
+
+
+    models = {
+        u'auth.group': {
+            'Meta': {'object_name': 'Group'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '80'}),
+            'permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'})
+        },
+        u'auth.permission': {
+            'Meta': {'ordering': "(u'content_type__app_label', u'content_type__model', u'codename')", 'unique_together': "((u'content_type', u'codename'),)", 'object_name': 'Permission'},
+            'codename': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['contenttypes.ContentType']"}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
+        },
+        u'contenttypes.contenttype': {
+            'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
+            'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+        },
+        u'imagefinder.image': {
+            'Meta': {'object_name': 'Image'},
+            'apiURL': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'api_id': ('django.db.models.fields.IntegerField', [], {'null': 'True'}),
+            'author': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True'}),
+            'created': ('django.db.models.fields.DateField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'favorites': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'image'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['imagefinder.User']"}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'imageURL': ('django.db.models.fields.URLField', [], {'max_length': '200'}),
+            'modified': ('django.db.models.fields.DateField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'pageURL': ('django.db.models.fields.URLField', [], {'max_length': '200'}),
+            'referrer': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True'}),
+            'tags': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'image'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['imagefinder.Tag']"}),
+            'thumbnailURL': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '150', 'null': 'True'})
+        },
+        u'imagefinder.tag': {
+            'Meta': {'object_name': 'Tag'},
+            'created': ('django.db.models.fields.DateField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'modified': ('django.db.models.fields.DateField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
+        },
+        u'imagefinder.user': {
+            'Meta': {'object_name': 'User'},
+            'about': ('django.db.models.fields.TextField', [], {'null': 'True'}),
+            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
+            'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
+            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Group']"}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
+            'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
+            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Permission']"}),
+            'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
+        }
+    }
+
+    complete_apps = ['imagefinder']
