@@ -52,7 +52,12 @@ def upload(request):
 def show_image(request):
     if request.method == 'POST':
         data = json.loads(request.body)
+        # Should be able to just say request.user.image since you defined a related_name in your models
+        # You may want to rename the related_name to 'images' or 'favorite_images' to be more readable
         my_favorites = Image.objects.filter(favorites__username=request.user)
+        
+        # Should also just be able to filter the queryset and use 'exists()' instead of looping through each one and checking
+        # request.user.image.filters(pageUrl=data['pageURL']).exists()
         for favorite in my_favorites:
             if favorite.pageURL == data['pageURL']:
                 data['favorited'] = 'yes'
@@ -67,6 +72,8 @@ def save_image(request):
         print data
         image = Image.objects.filter(pageURL = data['pageURL'])
         # If image doesn't exist
+        # Use .exists() here instead of len() on the queryset
+        # or use image.count()
         if len(image)<1:
             print "Image is being saved to database"
             image = Image.objects.create(
@@ -89,12 +96,14 @@ def save_image(request):
         # image = Image.objects.get(pageURL=data['pageURL'])
 
         user = User.objects.get(username = request.user)
+        # request.user should already be a user object, you should just be able to do request.user.image.add(image)
         user.image.add(image)
         return render(request, 'includes/show_image.html')
 
 
 # To Unfavorite an image:
 
+# Should be able to google to figure out how to not csrf_exempt views for AJAX
 @csrf_exempt
 def unfavorite_image(request):
     if request.method == 'POST':
