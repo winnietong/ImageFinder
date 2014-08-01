@@ -17,6 +17,7 @@ $(document).ready(function(){
 
     function pixabayGet(page){
         var query = $("#search").val();
+        // Should abstract out and save the pixabay url, your username, and key to reuse in calls down below as well
         PixabayURL = "http://pixabay.com/api/?username=tongwinnie&key=32fc5bc54bf1e1dbcb82&search_term=" + query +
             "&image_type=photo&page=" + page + "&per_page=10";
         console.log(PixabayURL);
@@ -122,6 +123,9 @@ $(document).ready(function(){
         var referrer = $(this).parent().parent().data('referrer');
         console.log(referrer);
 
+        // It looks like you've already gotten all of these details your saving before about the pixabay image
+        // You could save this image data in javascript and just retrieve it out of a hash based on the id
+        // when a user clicks the favorite button instead of having to make another API call to pixabay
         if (referrer == "Pixabay"){
             url = "http://pixabay.com/api/?username=tongwinnie&key=32fc5bc54bf1e1dbcb82&id=" + id;
             imageInfo = {};
